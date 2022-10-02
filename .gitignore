@@ -3,3 +3,4 @@ game
 .DS_Store
 *.go0
 /raw_resources/*.png
+bin/
