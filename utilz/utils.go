@@ -2,10 +2,7 @@ package utilz
 
 import (
 	"encoding/csv"
-	"github.com/faiface/pixel"
-	"github.com/faiface/pixel/imdraw"
-	"github.com/golang/freetype/truetype"
-	"golang.org/x/image/font"
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
@@ -14,9 +11,15 @@ import (
 	"io/ioutil"
 	"math"
 	"math/rand"
-	"os"
 	"strconv"
+	"strings"
 	"time"
+
+	"github.com/faiface/pixel"
+	"github.com/faiface/pixel/imdraw"
+	"github.com/golang/freetype/truetype"
+	"github.com/steelx/go-rpg-cgm/resources"
+	"golang.org/x/image/font"
 )
 
 /*
@@ -42,12 +45,13 @@ e.g. usage :
 */
 
 func LoadPicture(path string) (pixel.Picture, error) {
-	file, err := os.Open(path)
+	path = strings.TrimPrefix(path, "../resources/")
+	f, err := resources.FS.Open(path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("open %s: %w", path, err)
 	}
-	defer file.Close()
-	img, _, err := image.Decode(file)
+	defer f.Close()
+	img, _, err := image.Decode(f)
 	if err != nil {
 		return nil, err
 	}
@@ -94,15 +98,16 @@ Run,16,23
 Jump,24,26
 */
 // e.g. animations = LoadAnimationFromCSV("./animations.csv", LoadAsFrames())
-func LoadAnimationsFromCSV(descPath string, spriteFrames []pixel.Rect) map[string][]pixel.Rect {
-	descFile, err := os.Open(descPath)
+func LoadAnimationsFromCSV(path string, spriteFrames []pixel.Rect) map[string][]pixel.Rect {
+	path = strings.TrimPrefix(path, "../resources/")
+	f, err := resources.FS.Open(path)
 	if err != nil {
 		return nil
 	}
-	defer descFile.Close()
+	defer f.Close()
 
 	// load the animation information, Name and interval inside the spritesheet
-	desc := csv.NewReader(descFile)
+	desc := csv.NewReader(f)
 	var animations = make(map[string][]pixel.Rect)
 	for {
 		anim, err := desc.Read()
@@ -154,10 +159,12 @@ func GenerateUVs(tileWidth, tileHeight float64, texture pixel.Picture) []UV {
 	return uvs
 }
 
-//LoadSprite load TMX tile image source
+// LoadSprite load TMX tile image source
 func LoadSprite(path string) (*pixel.Sprite, *pixel.PictureData) {
-	f, err := os.Open(path)
+	path = strings.TrimPrefix(path, "../resources/")
+	f, err := resources.FS.Open(path)
 	PanicIfErr(err)
+	defer f.Close()
 
 	img, err := png.Decode(f)
 	PanicIfErr(err)
@@ -193,7 +200,7 @@ func MaxInt(a, b int) int {
 	return b
 }
 
-//Clamp restricts a number to a certain range. If a value is too high,
+// Clamp restricts a number to a certain range. If a value is too high,
 // it’s reduced to the maximum.
 // If it’s too low, it’s increased to the minimum.
 func Clamp(value, min, max float64) float64 {
@@ -201,13 +208,14 @@ func Clamp(value, min, max float64) float64 {
 }
 
 func LoadTTF(path string, size float64) (font.Face, error) {
-	file, err := os.Open(path)
+	path = strings.TrimPrefix(path, "../resources/")
+	f, err := resources.FS.Open(path)
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+	defer f.Close()
 
-	bytes, err := ioutil.ReadAll(file)
+	bytes, err := ioutil.ReadAll(f)
 	if err != nil {
 		return nil, err
 	}
@@ -223,7 +231,7 @@ func LoadTTF(path string, size float64) (font.Face, error) {
 	}), nil
 }
 
-//HexToColor("#E53935")
+// HexToColor("#E53935")
 func HexToColor(hex string) (c color.RGBA) {
 	c.A = 0xff
 
