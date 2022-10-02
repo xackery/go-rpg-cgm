@@ -2,13 +2,14 @@ package game_map
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/utilz"
 	"github.com/steelx/go-rpg-cgm/world"
-	"reflect"
 )
 
 type BrowseListState struct {

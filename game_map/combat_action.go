@@ -2,10 +2,11 @@ package game_map
 
 import (
 	"fmt"
-	"github.com/steelx/go-rpg-cgm/combat"
-	"github.com/steelx/go-rpg-cgm/world"
 	"math"
 	"reflect"
+
+	"github.com/steelx/go-rpg-cgm/combat"
+	"github.com/steelx/go-rpg-cgm/world"
 )
 
 var CombatActions = map[world.Action]func(state *CombatState, owner *combat.Actor, targets []*combat.Actor, defI interface{}){

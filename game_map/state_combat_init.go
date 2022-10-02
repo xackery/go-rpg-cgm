@@ -2,6 +2,10 @@ package game_map
 
 import (
 	"fmt"
+	"image/color"
+	"math"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
@@ -12,12 +16,9 @@ import (
 	"github.com/steelx/go-rpg-cgm/state_machine"
 	"github.com/steelx/go-rpg-cgm/utilz"
 	"github.com/steelx/go-rpg-cgm/world"
-	"image/color"
-	"math"
-	"reflect"
 )
 
-//CS -> CombatState
+// CS -> CombatState
 const (
 	csNpcStand = "cs_npc_stand"
 	csEnemyDie = "cs_enemy_die"
@@ -474,7 +475,7 @@ func (c *CombatState) DrawHP(renderer pixel.Target, x, y float64, actor *combat.
 
 	textBase := text.New(pixel.V(x, y), gui.BasicAtlasAscii)
 	textBase.Color = txtColor
-	fmt.Fprintf(textBase, fmt.Sprintf("%v/%v", hp, max))
+	fmt.Fprintf(textBase, "%v/%v", hp, max)
 	textBase.Draw(renderer, pixel.IM)
 }
 

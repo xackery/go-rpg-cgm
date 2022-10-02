@@ -1,12 +1,13 @@
 package game_map
 
 import (
+	"image/color"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/animation"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"image/color"
-	"reflect"
 )
 
 //csEnemyDie

@@ -2,17 +2,21 @@ package gui
 
 import (
 	"fmt"
+	"math"
+	"strings"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/animation"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"math"
-	"strings"
 )
 
-/* e.g.
+/*
+	e.g.
+
 tBox := TextboxCreateFixed(
+
 		"A nation can survive its fools, and even the ambitious. But it cannot survive treason from within. An enemy at the gates is less formidable, for he is known and carries his banner openly. But the traitor moves amongst those within the gate freely, his sly whispers rustling through all the alleys, heard in the very halls of government itself. For the traitor appears not a traitor; he speaks in accents familiar to his victims, and he wears their face and their arguments, he appeals to the baseness that lies deep in the hearts of all men. He rots the soul of a nation, he works secretly and unknown in the night to undermine the pillars of the city, he infects the body politic so that it can no longer resist. A murderer is less to fear. Jai Hind I Love India <3 ",
 		pixel.V(-150, 200), 300, 100,
 		"Ajinkya",
@@ -177,7 +181,7 @@ func TextboxCreateFixed(stack *StateStack, txt string, panelPos pixel.Vec, panel
 	return t
 }
 
-//TextboxCreateFitted are good for small chats
+// TextboxCreateFitted are good for small chats
 // height and width gets set automatically
 func TextboxCreateFitted(stack *StateStack, txt string, panelPos pixel.Vec, hasMenu bool) Textbox {
 	const padding = 20.0
@@ -308,8 +312,8 @@ func (t *Textbox) renderFitted(renderer pixel.Target) {
 	t.textBase.Draw(renderer, pixel.IM.Scaled(t.Position, scale))
 }
 
-//RenderWithPanel will render text based on Panel height and divide rows
-//based on available height, it will destroy at the end of Next last user input
+// RenderWithPanel will render text based on Panel height and divide rows
+// based on available height, it will destroy at the end of Next last user input
 func (t *Textbox) renderFixed(renderer pixel.Target) {
 	t.textBase.Clear()
 	//limit prints
@@ -369,10 +373,10 @@ func (t *Textbox) Exit() {
 
 }
 
-//HandleInput takes care of 3 types of textbox's
-//1 textbox with menu
-//2 Fixed then we let the blocks render
-//3 Fitted users marks as read and goes to next text popup
+// HandleInput takes care of 3 types of textbox's
+// 1 textbox with menu
+// 2 Fixed then we let the blocks render
+// 3 Fitted users marks as read and goes to next text popup
 func (t *Textbox) HandleInput(window *pixelgl.Window) {
 	if t.hasMenu {
 		t.menu.HandleInput(window)

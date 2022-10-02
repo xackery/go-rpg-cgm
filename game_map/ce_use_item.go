@@ -2,9 +2,10 @@ package game_map
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/world"
-	"reflect"
 )
 
 type CEUseItem struct {

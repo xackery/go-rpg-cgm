@@ -1,10 +1,11 @@
 package game_map
 
 import (
+	"math"
+
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/utilz"
 	"github.com/steelx/go-rpg-cgm/world"
-	"math"
 )
 
 type HitResult int

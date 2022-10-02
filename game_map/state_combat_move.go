@@ -1,12 +1,12 @@
 package game_map
 
 import (
-	"fmt"
+	"math"
+	"reflect"
+
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/animation"
 	"github.com/steelx/go-rpg-cgm/state_machine"
-	"math"
-	"reflect"
 )
 
 type CSMoveParams struct {
@@ -25,7 +25,7 @@ type CSMove struct {
 	PixelX, PixelY         float64
 }
 
-//char *Character, cs *CombatState
+// char *Character, cs *CombatState
 func CSMoveCreate(args ...interface{}) state_machine.State {
 	charV := reflect.ValueOf(args[0])
 	char := charV.Interface().(*Character)
@@ -47,10 +47,10 @@ func (s CSMove) IsFinished() bool {
 	return s.Tween.IsFinished()
 }
 
-//data = CSMoveParams
+// data = CSMoveParams
 func (s *CSMove) Enter(data ...interface{}) {
 	if len(data) == 0 || !reflect.ValueOf(data[0]).CanInterface() {
-		panic(fmt.Sprintf("Please pass CSMoveParams while changing State"))
+		panic("Please pass CSMoveParams while changing State")
 		return
 	}
 	backForth := reflect.ValueOf(data[0]).Interface().(CSMoveParams)

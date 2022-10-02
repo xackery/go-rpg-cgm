@@ -2,8 +2,9 @@ package world
 
 import (
 	"fmt"
-	"github.com/fatih/structs"
 	"reflect"
+
+	"github.com/fatih/structs"
 )
 
 /*

@@ -1,11 +1,12 @@
 package game_map
 
 import (
+	"image/color"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/gui"
-	"image/color"
 )
 
 type ScreenState struct {

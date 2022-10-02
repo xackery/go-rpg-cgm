@@ -2,12 +2,13 @@ package gui
 
 import (
 	"fmt"
+	"math"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"math"
-	"reflect"
 )
 
 /* e.g.

@@ -1,10 +1,11 @@
 package game_map
 
 import (
+	"reflect"
+
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/globals"
 	"github.com/steelx/go-rpg-cgm/state_machine"
-	"reflect"
 )
 
 type WaitState struct {

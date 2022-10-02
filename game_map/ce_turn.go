@@ -2,6 +2,7 @@ package game_map
 
 import (
 	"fmt"
+
 	"github.com/steelx/go-rpg-cgm/combat"
 )
 

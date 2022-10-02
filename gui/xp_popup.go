@@ -2,12 +2,13 @@ package gui
 
 import (
 	"fmt"
+	"image/color"
+	"math"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/animation"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"image/color"
-	"math"
 )
 
 type XPPopUp struct {

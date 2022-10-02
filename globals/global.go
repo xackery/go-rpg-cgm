@@ -1,9 +1,10 @@
 package globals
 
 import (
+	"image/color"
+
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"image/color"
 )
 
 //=============================================================

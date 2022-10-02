@@ -2,6 +2,8 @@ package game_map
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
@@ -11,7 +13,6 @@ import (
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/state_machine"
 	"golang.org/x/image/font/basicfont"
-	"reflect"
 )
 
 type StatusMenuState struct {
@@ -47,7 +48,7 @@ func StatusMenuStateCreate(parent *InGameMenuState, win *pixelgl.Window) *Status
 	}
 }
 
-/////////////////////////////
+// ///////////////////////////
 // StateMachine impl below //
 func (s StatusMenuState) IsFinished() bool {
 	return true
@@ -184,6 +185,6 @@ func (s StatusMenuState) DrawStat(renderer pixel.Target, x, y float64, label str
 	basicAtlas := text.NewAtlas(basicfont.Face7x13, text.ASCII)
 	pos := pixel.V(x, y)
 	textBase := text.New(pos, basicAtlas)
-	fmt.Fprintln(textBase, fmt.Sprintf("%-14s: %v", label, value))
+	fmt.Fprintf(textBase, "%-14s: %v\n", label, value)
 	textBase.Draw(renderer, pixel.IM)
 }

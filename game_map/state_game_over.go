@@ -1,12 +1,13 @@
 package game_map
 
 import (
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/sirupsen/logrus"
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/gui"
-	"reflect"
 )
 
 type GameOverState struct {
@@ -19,7 +20,7 @@ type GameOverState struct {
 func GameOverStateCreate(stack *gui.StateStack) *GameOverState {
 	world := reflect.ValueOf(stack.Globals["world"]).Interface().(*combat.WorldExtended)
 	captions := []gui.CaptionStyle{
-		{"Game Over", 3},
+		{Text: "Game Over", Scale: 3},
 	}
 	s := &GameOverState{
 		Stack:    stack,

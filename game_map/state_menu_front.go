@@ -2,6 +2,8 @@ package game_map
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
@@ -9,7 +11,6 @@ import (
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/state_machine"
 	"golang.org/x/image/font/basicfont"
-	"reflect"
 )
 
 type FrontMenuState struct {
@@ -129,7 +130,7 @@ func (fm *FrontMenuState) goBackToFrontMenu() {
 }
 
 /*
-   StateMachine :: State impl below
+StateMachine :: State impl below
 */
 func (fm FrontMenuState) IsFinished() bool {
 	return true
@@ -181,11 +182,11 @@ func (fm FrontMenuState) Render(renderer *pixelgl.Window) {
 	goldX := fm.Layout.Left("gold") + 16
 	goldY := fm.Layout.Top("gold") - 24
 	textBase = text.New(pixel.V(goldX, goldY), basicAtlas)
-	fmt.Fprintln(textBase, fmt.Sprintf("GP : %v", fm.World.Gold))
+	fmt.Fprintf(textBase, "GP : %v\n", fm.World.Gold)
 	textBase.Draw(renderer, pixel.IM)
 
 	textBase = text.New(pixel.V(goldX, goldY-25), basicAtlas)
-	fmt.Fprintln(textBase, fmt.Sprintf("TIME : %v", fm.World.Time))
+	fmt.Fprintf(textBase, "TIME : %v\n", fm.World.Time)
 	textBase.Draw(renderer, pixel.IM)
 
 	// Party Members
@@ -195,7 +196,7 @@ func (fm FrontMenuState) Render(renderer *pixelgl.Window) {
 	fm.PartyMenu.Render(renderer)
 }
 
-//get text Width
+// get text Width
 func getTextW(textBase *text.Text, txt string) float64 {
 	return textBase.BoundsOf(txt).W()
 }

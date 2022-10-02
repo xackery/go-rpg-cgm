@@ -1,12 +1,13 @@
 package game_map
 
 import (
+	"log"
+	"sort"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/tilepix"
-	"log"
-	"sort"
 )
 
 type ExploreState struct {

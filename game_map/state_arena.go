@@ -2,13 +2,14 @@ package game_map
 
 import (
 	"fmt"
+	"math"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/gui"
-	"math"
-	"reflect"
 )
 
 var rounds = []*ArenaRound{
@@ -91,7 +92,7 @@ func ArenaStateCreate(stack *gui.StateStack, prevState gui.StackInterface) gui.S
 	return s
 }
 
-//renderer pixel.Target, x, y float64, item ArenaRound
+// renderer pixel.Target, x, y float64, item ArenaRound
 func (s *ArenaState) RenderRoundItem(a ...interface{}) {
 	renderer := reflect.ValueOf(a[0]).Interface().(pixel.Target)
 	x := reflect.ValueOf(a[1]).Interface().(float64)
@@ -105,7 +106,7 @@ func (s *ArenaState) RenderRoundItem(a ...interface{}) {
 
 	label := fmt.Sprintf("%s: %s", round.Name, lockLabel)
 	textBase := text.New(pixel.V(x, y), gui.BasicAtlas12)
-	fmt.Fprintf(textBase, label)
+	fmt.Fprint(textBase, label)
 	textBase.Draw(renderer, pixel.IM)
 }
 
@@ -178,7 +179,7 @@ func (s *ArenaState) Render(renderer *pixelgl.Window) {
 	titleTxt := "Welcome to the Arena"
 	pos = pixel.V(titleX-textBase.BoundsOf(titleTxt).W()/2, titleY)
 	textBase = text.New(pos, gui.BasicAtlasAscii)
-	fmt.Fprintf(textBase, titleTxt)
+	fmt.Fprint(textBase, titleTxt)
 	textBase.Draw(renderer, pixel.IM.Scaled(pos, 2))
 
 	headerX := s.Layout.MidX("header")

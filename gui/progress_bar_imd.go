@@ -1,11 +1,12 @@
 package gui
 
 import (
+	"image/color"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"image/color"
 )
 
 type ProgressBarIMD struct {

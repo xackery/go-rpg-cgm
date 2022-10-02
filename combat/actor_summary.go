@@ -2,6 +2,7 @@ package combat
 
 import (
 	"fmt"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/gui"

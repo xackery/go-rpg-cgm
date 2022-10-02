@@ -14,8 +14,8 @@ type ArenaCompleteState struct {
 
 func ArenaCompleteStateCreate(stack *gui.StateStack, prevState gui.StackInterface) *ArenaCompleteState {
 	captions := []gui.CaptionStyle{
-		{"YOU WON!", 3},
-		{"Champion of the Arena", 1},
+		{Text: "YOU WON!", Scale: 3},
+		{Text: "Champion of the Arena", Scale: 1},
 	}
 	return &ArenaCompleteState{
 		Stack:     stack,

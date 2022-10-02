@@ -34,7 +34,7 @@ type Icons struct {
 }
 
 func IconsCreate() Icons {
-	inventoryIconsPng, err := utilz.LoadPicture("../resources/inventory_icons.png")
+	inventoryIconsPng, err := utilz.LoadPicture("inventory_icons.png")
 	utilz.PanicIfErr(err)
 	//488
 	ico := Icons{
@@ -52,7 +52,7 @@ func IconsCreate() Icons {
 	return ico
 }
 
-//Get accepts Item.Icon int e.g. 3
+// Get accepts Item.Icon int e.g. 3
 func (i Icons) Get(d int) *pixel.Sprite {
 	return i.Sprites[d]
 }

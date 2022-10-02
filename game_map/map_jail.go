@@ -1,12 +1,13 @@
 package game_map
 
 import (
+	"reflect"
+
 	"github.com/sirupsen/logrus"
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/utilz"
 	"github.com/steelx/tilepix"
-	"reflect"
 )
 
 func mapJail(gStack *gui.StateStack) MapInfo {

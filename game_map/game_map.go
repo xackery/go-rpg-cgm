@@ -1,12 +1,13 @@
 package game_map
 
 import (
+	"image/color"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	log "github.com/sirupsen/logrus"
 	"github.com/steelx/go-rpg-cgm/utilz"
 	"github.com/steelx/tilepix"
-	"image/color"
 )
 
 type GameMap struct {

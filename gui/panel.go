@@ -1,10 +1,11 @@
 package gui
 
 import (
+	"image/color"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/imdraw"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"image/color"
 )
 
 type Panel struct {

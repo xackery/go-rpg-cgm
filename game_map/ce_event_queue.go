@@ -2,13 +2,14 @@ package game_map
 
 import (
 	"fmt"
+	"math"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/sirupsen/logrus"
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/gui"
-	"math"
 )
 
 type EventQueue struct {
@@ -93,7 +94,7 @@ func (q EventQueue) SpeedToTimePoints(speed float64) float64 {
 	return math.Floor(points)
 }
 
-//Print just for debug
+// Print just for debug
 func (q EventQueue) Print() {
 	if q.IsEmpty() {
 		logrus.Info("Event Queue is empty.")
@@ -151,7 +152,7 @@ func (q *EventQueue) Render(win *pixelgl.Window) {
 
 	textBase := text.New(pixel.V(0, 0), gui.BasicAtlasAscii)
 	if q.CurrentEvent != nil {
-		fmt.Fprintln(textBase, fmt.Sprintf("CURRENT: %s", q.CurrentEvent.Name()))
+		fmt.Fprintf(textBase, "CURRENT: %s\n", q.CurrentEvent.Name())
 	}
 
 	y = y - yInc

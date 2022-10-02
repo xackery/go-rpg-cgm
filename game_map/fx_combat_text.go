@@ -2,13 +2,14 @@ package game_map
 
 import (
 	"fmt"
+	"image/color"
+	"math"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/text"
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/utilz"
-	"image/color"
-	"math"
-	"reflect"
 )
 
 type CombatTextFX struct {

@@ -1,11 +1,11 @@
 package game_map
 
 import (
-	"fmt"
+	"reflect"
+
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/steelx/go-rpg-cgm/animation"
 	"github.com/steelx/go-rpg-cgm/state_machine"
-	"reflect"
 )
 
 type CSRunAnim struct {
@@ -17,7 +17,7 @@ type CSRunAnim struct {
 	AnimId      string
 }
 
-//char *Character, cs *CombatState
+// char *Character, cs *CombatState
 func CSRunAnimCreate(args ...interface{}) state_machine.State {
 	charV := reflect.ValueOf(args[0])
 	char := charV.Interface().(*Character)
@@ -34,7 +34,7 @@ func CSRunAnimCreate(args ...interface{}) state_machine.State {
 
 func (s *CSRunAnim) Enter(data ...interface{}) {
 	if len(data) != 2 {
-		panic(fmt.Sprintf("Please pass AnimID & Loop bool while changing State"))
+		panic("Please pass AnimID & Loop bool while changing State")
 		return
 	}
 	animV := reflect.ValueOf(data[0])

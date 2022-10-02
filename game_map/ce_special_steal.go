@@ -2,10 +2,11 @@ package game_map
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/world"
-	"reflect"
 )
 
 type CESteal struct {

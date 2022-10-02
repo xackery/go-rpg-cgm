@@ -1,9 +1,10 @@
 package gui
 
 import (
+	"log"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
-	"log"
 )
 
 type Layout struct {

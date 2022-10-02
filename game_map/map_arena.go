@@ -2,12 +2,13 @@ package game_map
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/sirupsen/logrus"
 	"github.com/steelx/go-rpg-cgm/combat"
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/world"
 	"github.com/steelx/tilepix"
-	"reflect"
 )
 
 func mapArena(gStack *gui.StateStack) MapInfo {
@@ -62,10 +63,10 @@ func mapArena(gStack *gui.StateStack) MapInfo {
 		x, y := gameMap.GetTileIndex(tileX, tileY)
 
 		loot := []world.ItemIndex{
-			{1, 1},
-			{2, 1},
-			{6, 1},
-			{10, 1},
+			{Id: 1, Count: 1},
+			{Id: 2, Count: 1},
+			{Id: 6, Count: 1},
+			{Id: 10, Count: 1},
 		}
 
 		playKeyItemFound := PlayBGSound("../sound/key_item.mp3")

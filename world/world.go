@@ -2,12 +2,13 @@ package world
 
 import (
 	"fmt"
+	"math"
+	"reflect"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/text"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/image/font/basicfont"
-	"math"
-	"reflect"
 )
 
 type World struct {

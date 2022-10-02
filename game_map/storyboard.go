@@ -1,10 +1,11 @@
 package game_map
 
 import (
+	"reflect"
+
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/sirupsen/logrus"
 	"github.com/steelx/go-rpg-cgm/gui"
-	"reflect"
 )
 
 type Storyboard struct {

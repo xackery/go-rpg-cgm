@@ -1,6 +1,11 @@
 package game_map
 
 import (
+	"image/color"
+	"reflect"
+	"strings"
+	"time"
+
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/mp3"
 	"github.com/faiface/beep/speaker"
@@ -10,10 +15,6 @@ import (
 	"github.com/steelx/go-rpg-cgm/gui"
 	"github.com/steelx/go-rpg-cgm/sound"
 	"github.com/steelx/go-rpg-cgm/state_machine"
-	"image/color"
-	"os"
-	"reflect"
-	"time"
 )
 
 var queue sound.Queue
@@ -32,7 +33,7 @@ func Wait(seconds float64) *WaitEvent {
 	return WaitEventCreate(seconds)
 }
 
-//BlackScreen - end to call KillState("blackscreen") once done
+// BlackScreen - end to call KillState("blackscreen") once done
 func BlackScreen(id string) func(storyboard *Storyboard) *WaitEvent {
 	return func(storyboard *Storyboard) *WaitEvent {
 		screen := ScreenStateCreate(storyboard.Stack, color.RGBA{R: 255, G: 255, B: 255, A: 1})
@@ -90,7 +91,7 @@ func Scene(mapName string, hideHero bool, win *pixelgl.Window) func(storyboard *
 	}
 }
 
-//player_house, def = "sleeper", x = 14, y = 19
+// player_house, def = "sleeper", x = 14, y = 19
 func RunActionAddNPC(mapName, entityDef string, x, y, seconds float64) func(storyboard *Storyboard) *WaitEvent {
 	return func(storyboard *Storyboard) *WaitEvent {
 		exploreState := getExploreState(storyboard, mapName)
@@ -141,7 +142,7 @@ func Say(mapName, npcId, textMessage string, time float64) func(storyboard *Stor
 	}
 }
 
-//ReplaceScene will remove mapName and add newMapName with a Hero at given Tile X, Y
+// ReplaceScene will remove mapName and add newMapName with a Hero at given Tile X, Y
 func ReplaceScene(mapName string, newMapName string, tileX, tileY float64, hideHero bool, win *pixelgl.Window) func(storyboard *Storyboard) *NonBlockEvent {
 	return func(storyboard *Storyboard) *NonBlockEvent {
 		if win == nil {
@@ -164,7 +165,7 @@ func ReplaceScene(mapName string, newMapName string, tileX, tileY float64, hideH
 	}
 }
 
-//HandOffToMainStack will remove the exploreState from Storyboard and push it to main stack
+// HandOffToMainStack will remove the exploreState from Storyboard and push it to main stack
 func HandOffToMainStack(mapName string) func(storyboard *Storyboard) *WaitEvent {
 	return func(storyboard *Storyboard) *WaitEvent {
 		exploreState := getExploreState(storyboard, mapName)
@@ -261,7 +262,7 @@ func SetHiddenTileVisible(mapName string, tileX, tileY float64) func(storyboard 
 	}
 }
 
-//MoveCamToTile not working as intended. pending
+// MoveCamToTile not working as intended. pending
 func MoveCamToTile(stateId string, fromTileX, fromTileY, tileX, tileY, duration float64) func(storyboard *Storyboard) *TweenEvent {
 
 	return func(storyboard *Storyboard) *TweenEvent {
@@ -289,9 +290,10 @@ func MoveCamToTile(stateId string, fromTileX, fromTileY, tileX, tileY, duration 
 	}
 }
 
-//PlaySound will stop after the given duration
-func PlaySound(pathToSound string, duration float64) func(storyboard *Storyboard) *NonBlockingTimer {
-	f, err := os.Open(pathToSound)
+// PlaySound will stop after the given duration
+func PlaySound(path string, duration float64) func(storyboard *Storyboard) *NonBlockingTimer {
+	path = strings.TrimPrefix(path, "../sound/")
+	f, err := sound.FS.Open(path)
 	logFatalErr(err)
 
 	// Decode it.
@@ -299,7 +301,7 @@ func PlaySound(pathToSound string, duration float64) func(storyboard *Storyboard
 	logFatalErr(err)
 
 	return func(storyboard *Storyboard) *NonBlockingTimer {
-		logrus.Info("Playing sound: ", pathToSound)
+		logrus.Info("Playing sound: ", path)
 
 		// The speaker's sample rate is fixed at 44100. Therefore, we need to
 		// resample the file in case it's in a different sample rate.
@@ -315,16 +317,17 @@ func PlaySound(pathToSound string, duration float64) func(storyboard *Storyboard
 			func(e *NonBlockingTimer) {
 				if e.TimeUp() {
 					queue.Pop()
-					logrus.Info("Removing sound: ", pathToSound)
+					logrus.Info("Removing sound: ", path)
 				}
 			},
 		)
 	}
 }
 
-//PlayBGSound will stop after track has finished
-func PlayBGSound(pathToSound string) func() {
-	f, err := os.Open(pathToSound)
+// PlayBGSound will stop after track has finished
+func PlayBGSound(path string) func() {
+	path = strings.TrimPrefix(path, "../sound/")
+	f, err := sound.FS.Open(path)
 	logFatalErr(err)
 
 	// Decode it.
@@ -338,7 +341,7 @@ func PlayBGSound(pathToSound string) func() {
 	//f.Close()
 
 	return func() {
-		logrus.Info("Playing BG sound: ", pathToSound)
+		logrus.Info("Playing BG sound: ", path)
 		//bufferedSound := buffer.Streamer(0, buffer.Len())
 
 		// The speaker's sample rate is fixed at 44100. Therefore, we need to
@@ -350,11 +353,10 @@ func PlayBGSound(pathToSound string) func() {
 		queueBG.Add(resampled)
 		speaker.Unlock()
 
-		return
 	}
 }
 
-//StopBGSound will pop out last queueBG item
+// StopBGSound will pop out last queueBG item
 func StopBGSound() func() {
 	return func() {
 		queueBG.Pop()
